@@ -1,0 +1,17 @@
+javascript:(function(){
+    document.querySelectorAll(".answerlist1").forEach(div => {
+        if (div.textContent.trim() === "Puas") {
+            // Coba cari input radio sebagai sibling atau di parent-nya
+            let radio = div.previousElementSibling?.type === "radio" ? div.previousElementSibling :
+                        div.nextElementSibling?.type === "radio" ? div.nextElementSibling :
+                        div.parentElement.querySelector('input[type="radio"]');
+
+            if (radio) radio.checked = true;
+        }
+    });
+
+    // Isi semua kolom komentar (textarea) dengan "sudah bagus"
+    document.querySelectorAll('textarea').forEach(text => {
+        text.value = "sudah bagus";
+    });
+})();
