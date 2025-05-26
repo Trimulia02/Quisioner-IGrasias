@@ -10,22 +10,23 @@ Skrip ini adalah **bookmarklet JavaScript** yang secara otomatis:
 1. **Salin seluruh kode JavaScript di bawah ini:**
 
     ```javascript
-    javascript:(function(){
-        document.querySelectorAll(".answerlist1").forEach(div => {
-            if (div.textContent.trim() === "Puas") {
-                // Coba cari input radio sebagai sibling atau di parent-nya
-                let radio = div.previousElementSibling?.type === "radio" ? div.previousElementSibling :
-                            div.nextElementSibling?.type === "radio" ? div.nextElementSibling :
-                            div.parentElement.querySelector('input[type="radio"]');
-                if (radio) radio.checked = true;
-            }
-        });
-
-        // Isi semua kolom komentar (textarea) dengan "sudah bagus"
-        document.querySelectorAll('textarea').forEach(text => {
-            text.value = "sudah bagus";
-        });
-    })();
+        javascript:(function(){
+            document.querySelectorAll(".answerlist1").forEach(div => {
+                let text = div.textContent.trim();
+                if (text === "Puas" || text === "Ya") {
+                    // Cari input radio di sekitar elemen teks
+                    let radio = div.previousElementSibling?.type === "radio" ? div.previousElementSibling :
+                                div.nextElementSibling?.type === "radio" ? div.nextElementSibling :
+                                div.parentElement.querySelector('input[type="radio"]');
+                    if (radio) radio.checked = true;
+                }
+            });
+        
+            // Isi semua kolom komentar (textarea) dengan "sudah bagus"
+            document.querySelectorAll('textarea').forEach(text => {
+                text.value = "sudah bagus";
+            });
+        })();
     ```
 
 2. **Buat Bookmark Baru** di browser kamu.
